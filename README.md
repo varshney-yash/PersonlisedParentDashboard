@@ -1,4 +1,4 @@
-# Django microservice for a personalised dashboard 
+# Django microservice for a personalised dashboard for parents
 
 
 ## For HLD refer architechure folder
