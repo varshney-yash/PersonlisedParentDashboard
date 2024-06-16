@@ -25,6 +25,9 @@ class ServiceCheckAPI(APIView):
         return SuccessResponse(context, status=200)
 
 class UserContentAPIView(APIView):
+
+    permission_classes = (APIKeyPermission,)
+
     def get(self, request, version=1):
         user_id = request.GET.get('uid') if request.GET.get('uid') else request.user.id
 
@@ -59,6 +62,9 @@ class UserContentAPIView(APIView):
         return SuccessResponse({"result": True, "data": response_data}, status=200)
 
 class UserCreateAPIView(APIView):
+
+    permission_classes = (APIKeyPermission,)
+
     def post(self, request, version, *args, **kwargs):
         try:
             user = UserDAO.create_user(request.data)
@@ -67,6 +73,9 @@ class UserCreateAPIView(APIView):
             return ErrorResponse(e.detail, status=400)
 
 class UserUpdateAPIView(APIView):
+
+    permission_classes = (APIKeyPermission,)
+
     def put(self, request, user_id, version, *args, **kwargs):
         try:
             user = UserDAO.update_user(user_id, request.data)
@@ -75,6 +84,10 @@ class UserUpdateAPIView(APIView):
             return ErrorResponse(e.detail, status=400)
 
 class ChildrenCreateUpdateAPIView(APIView):
+    
+    permission_classes = (APIKeyPermission,)
+
+    
     def post(self, request, user_id, version, *args, **kwargs):
         try:
             children = ChildDAO.create_children_for_user(user_id, request.data)
